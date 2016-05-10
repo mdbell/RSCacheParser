@@ -64,7 +64,9 @@ public abstract class ConfigDecoder<T> {
             }
             try {
                 Object value = f.get(res);
-                f.set(res,d.decode(opcode, value, buffer));
+                //TODO add offsets here
+                DecodeContext<?> ctx = new DecodeContext<>(opcode,value);
+                f.set(res,d.decode(ctx, buffer));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
