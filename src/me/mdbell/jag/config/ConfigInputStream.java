@@ -29,19 +29,21 @@ public abstract class ConfigInputStream<T> extends FilterInputStream{
 
     public T next() throws IOException {
 
-        //if(remaining == 0) {
-        //    return null;
-//        /}
+        if(in.available() == 0) {
+            return null;
+        }
 
         T res = createTarget();
         int op;
         while((op = in.read()) > 0) {
             OpcodeDecoder<T> decoder = getDecoder(op);
             if(decoder == null) {
-                System.out.println(res);
                 throw new IOException(String.format("Unhandled opcode %s on: %s",op,res.getClass().getName()));
             }
             decoder.decode(in,res);
+        }
+        if(op == -1) {
+            return null;
         }
         remaining--;
         return res;

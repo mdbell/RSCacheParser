@@ -105,6 +105,7 @@ public class Entry implements Constants {
                 while((n = config.next()) != null) {
                     System.out.println(n);
                 }
+                System.exit(0);
             }
             dumpFile(name, zout, arc);
         }

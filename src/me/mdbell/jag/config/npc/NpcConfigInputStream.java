@@ -1,12 +1,10 @@
 package me.mdbell.jag.config.npc;
 
-import me.mdbell.jag.util.Utils;
 import me.mdbell.jag.config.ConfigInputStream;
 import me.mdbell.jag.config.OpcodeDecoder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 
 import static me.mdbell.jag.util.Utils.*;
 
@@ -21,7 +19,7 @@ public class NpcConfigInputStream extends ConfigInputStream<Npc> {
         DECODERS[1] = (in, npc) -> {
             int len = readUByte(in);
             npc.models = new int[len];
-            for (int i = 0; i < npc.models.length; i++) {
+            for (int i = 0; i < len; i++) {
                 npc.models[i] = readUShort(in);
             }
         };
@@ -29,8 +27,13 @@ public class NpcConfigInputStream extends ConfigInputStream<Npc> {
         DECODERS[2] = (in, npc) -> npc.name = readString(in);
 
         DECODERS[3] = (in, npc) -> npc.desc = readString(in);
+
         DECODERS[12] = (in, npc) -> npc.boundDim = readUByte(in);
+
         DECODERS[13] = (in, npc) -> npc.idleAnimation = readUShort(in);
+
+        DECODERS[14] = (in, npc) -> npc.walkAnimIndex = readUShort(in);
+
         DECODERS[17] = (in, npc) -> {
             npc.walkAnimIndex = readUShort(in);
             npc.turn180Index = readUShort(in);
@@ -64,8 +67,42 @@ public class NpcConfigInputStream extends ConfigInputStream<Npc> {
                 npc.additionalModels[i] = readUShort(in);
             }
         };
-        DECODERS[95] = (in, npc) -> npc.combatLevel = readInt(in);
+        DECODERS[90] = DECODERS[91] = DECODERS[92] = (in, npc) -> readUShort(in);
+
+        DECODERS[93] = (in, npc) -> npc.showOnMinimap = false;
+
+        DECODERS[95] = (in, npc) -> npc.combatLevel = readUShort(in);
+
+        DECODERS[97] = (in, npc) -> npc.scaleXZ = readUShort(in);
         DECODERS[98] = (in, npc) -> npc.scaleY = readUShort(in);
+        DECODERS[99] = (in, npc) -> npc.invisible = true;
+        DECODERS[100] = (in, npc) -> npc.lightModifier = readUByte(in);
+        DECODERS[101] = (in, npc) -> npc.shadowModifier = readUByte(in) * 5;
+        DECODERS[102] = (in, npc) -> npc.headIcon = readUShort(in);
+        DECODERS[103] = (in, npc) -> npc.degreesToTurn = readUShort(in);
+
+        DECODERS[106] = (in, npc) -> {
+            npc.varBitId = readUShort(in);
+            if(npc.varBitId == 65535) {
+                npc.varBitId = -1;
+            }
+            npc.sessionSettingId = readUShort(in);
+            if(npc.sessionSettingId == 65535) {
+                npc.sessionSettingId = -1;
+            }
+            int len = readUByte(in);
+            npc.childrenIds = new int[len + 1];
+            for(int i = 0; i <= len;i++) {
+                int id = readUShort(in);
+                if(id == 65535) {
+                    id = -1;
+                }
+                npc.childrenIds[i] = id;
+            }
+        };
+        DECODERS[107] = (in, npc) -> {
+            npc.clickable = false;
+        };
     }
 
     public NpcConfigInputStream(InputStream inputStream) throws IOException {
@@ -74,7 +111,6 @@ public class NpcConfigInputStream extends ConfigInputStream<Npc> {
 
     @Override
     protected OpcodeDecoder<Npc> getDecoder(int opcode) {
-        System.out.println(opcode);
         return DECODERS[opcode];
     }
 
