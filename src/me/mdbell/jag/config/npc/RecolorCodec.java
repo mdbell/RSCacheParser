@@ -1,7 +1,8 @@
 package me.mdbell.jag.config.npc;
 
+import me.mdbell.jag.config.Codec;
 import me.mdbell.jag.config.DecodeContext;
-import me.mdbell.jag.config.Decoder;
+import me.mdbell.jag.config.EncodeContext;
 import me.mdbell.jag.util.Utils;
 
 import java.nio.ByteBuffer;
@@ -9,7 +10,7 @@ import java.nio.ByteBuffer;
 /**
  * Created by matthew on 5/11/16.
  */
-public class RecolorDecoder implements Decoder<int[]> {
+public class RecolorCodec implements Codec<int[]> {
     @Override
     public int[] decode(DecodeContext<?, int[]> ctx, ByteBuffer source) {
         int len = Utils.readUByte(source);
@@ -24,7 +25,7 @@ public class RecolorDecoder implements Decoder<int[]> {
     }
 
     @Override
-    public void encode(int[] value, ByteBuffer target) {
+    public void encode(EncodeContext<?, int[]> ctx, ByteBuffer target) {
 
     }
 }

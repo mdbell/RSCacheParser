@@ -1,8 +1,9 @@
 package me.mdbell.jag.config.npc;
 
-import me.mdbell.jag.config.annotations.OpcodeOffset;
+import me.mdbell.jag.config.annotations.ArrayOffset;
+import me.mdbell.jag.config.annotations.RangeSerialize;
 import me.mdbell.jag.config.annotations.Serialize;
-import me.mdbell.jag.config.decoders.*;
+import me.mdbell.jag.config.codecs.*;
 
 import java.util.Arrays;
 
@@ -11,62 +12,62 @@ import java.util.Arrays;
  */
 public class Npc {
 
-    @Serialize(opcodes = 1, decoder = PascalByteShortArrayDecoder.class)
+    @Serialize(opcodes = 1, codec = PascalByteShortArrayCodec.class)
     int[] models;
-    @Serialize(opcodes = 2, decoder = StringDecoder.class)
+    @Serialize(opcodes = 2, codec = StringCodec.class)
     String name;
-    @Serialize(opcodes = 3, decoder = StringDecoder.class)
+    @Serialize(opcodes = 3, codec = StringCodec.class)
     String desc;
 
-    @Serialize(opcodes = 12, decoder = ByteDecoder.class)
-    int boundDim;
-    @Serialize(opcodes = 13, decoder = ShortDecoder.class)
-    int idleAnimation;
-    @Serialize(opcodes = 14, decoder = ShortDecoder.class)
-    int walkAnimIndex;
+    @Serialize(opcodes = 12, codec = ByteCodec.class)
+    int boundDim = 1;
+    @Serialize(opcodes = 13, codec = ShortCodec.class)
+    int idleAnimation = -1;
+    @Serialize(opcodes = 14, codec = ShortCodec.class)
+    int walkAnimIndex = -1;
 
-    @Serialize(opcodes = 17, decoder = AnimationRotationDecoder.class)
-    int turn180Index;
-    int turn90CWAnimIndex;
-    int turn90CCWAnimIndex;
+    @Serialize(opcodes = 17, codec = AnimationRotationCodec.class)
+    int turn180Index = -1;
+    int turn90CWAnimIndex = -1;
+    int turn90CCWAnimIndex = -1;
 
-    @OpcodeOffset(30)
-    @Serialize(opcodes = {30, 31, 32, 33, 34, 35, 36, 37, 38, 39}, decoder = OffsetStringDecoder.class)
+    @ArrayOffset(-30)
+    @RangeSerialize(min = 30, max = 39, codec = OffsetStringCodec.class)
     String[] actions = new String[10];
 
-    @Serialize(opcodes = 40, decoder = RecolorDecoder.class)
+    @Serialize(opcodes = 40, codec = RecolorCodec.class)
     int[] recolorOriginal;
     int[] recolorTarget;
 
-    @Serialize(opcodes = 60, decoder = PascalByteShortArrayDecoder.class)
+    @Serialize(opcodes = 60, codec = PascalByteShortArrayCodec.class)
     int[] additionalModels;
 
-    @Serialize(opcodes = 93, decoder = BoolFalseDecoder.class)
+    @Serialize(opcodes = 93, codec = BoolFalseCodec.class)
     boolean showOnMinimap = true;
 
-    @Serialize(opcodes = 95, decoder = ShortDecoder.class)
-    int combatLevel;
+    @Serialize(opcodes = 95, codec = ShortCodec.class)
+    int combatLevel = -1;
 
-    @Serialize(opcodes = 97, decoder = ShortDecoder.class)
-    int scaleXZ;
-    @Serialize(opcodes = 98, decoder = ShortDecoder.class)
-    int scaleY;
-    @Serialize(opcodes = 99, decoder = BoolTrueDecoder.class)
+    @Serialize(opcodes = 97, codec = ShortCodec.class)
+    int scaleXZ = 128;
+    @Serialize(opcodes = 98, codec = ShortCodec.class)
+    int scaleY = 128;
+    @Serialize(opcodes = 99, codec = BoolTrueCodec.class)
     boolean invisible = false;
-    @Serialize(opcodes = 100, decoder = ByteDecoder.class)
+    @Serialize(opcodes = 100, codec = ByteCodec.class)
     int lightModifier;
-    @Serialize(opcodes = 101, decoder = ByteMulFiveDecoder.class)
+    @Serialize(opcodes = 101, codec = ByteMulFiveCodec.class)
     int shadowModifier;
-    @Serialize(opcodes = 102, decoder = ShortDecoder.class)
-    int headIcon;
-    @Serialize(opcodes = 103, decoder = ShortDecoder.class)
-    int degreesToTurn;
+    @Serialize(opcodes = 102, codec = ShortCodec.class)
+    int headIcon = -1;
+    @Serialize(opcodes = 103, codec = ShortCodec.class)
+    int degreesToTurn = 32;
 
-    @Serialize(opcodes = 106, decoder = VarbitDecoder.class)
-    int varBitId;
-    int sessionSettingId;
+    @Serialize(opcodes = 106, codec = VarbitCodec.class)
+    int varBitId = -1;
+    int sessionSettingId = -1;
     int[] childrenIds;
-    @Serialize(opcodes = 107, decoder = BoolFalseDecoder.class)
+    @Serialize(opcodes = 107, codec = BoolFalseCodec.class)
     boolean clickable = true;
 
     @Override

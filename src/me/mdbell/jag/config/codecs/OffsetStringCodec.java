@@ -1,7 +1,8 @@
-package me.mdbell.jag.config.decoders;
+package me.mdbell.jag.config.codecs;
 
+import me.mdbell.jag.config.Codec;
 import me.mdbell.jag.config.DecodeContext;
-import me.mdbell.jag.config.Decoder;
+import me.mdbell.jag.config.EncodeContext;
 import me.mdbell.jag.util.Utils;
 
 import java.nio.ByteBuffer;
@@ -9,7 +10,7 @@ import java.nio.ByteBuffer;
 /**
  * Created by matthew on 5/11/16.
  */
-public class OffsetStringDecoder implements Decoder<String[]> {
+public class OffsetStringCodec implements Codec<String[]> {
     @Override
     public String[] decode(DecodeContext<?, String[]> ctx, ByteBuffer source) {
         String[] value = ctx.getValue();
@@ -17,7 +18,7 @@ public class OffsetStringDecoder implements Decoder<String[]> {
             value = new String[1];
         }
         String str = Utils.readString(source);
-        int pos = ctx.getOpcode() - ctx.getOffset();
+        int pos = ctx.getOpcode() + ctx.getOffset();
         if (pos >= value.length) {
             value = grow(value, pos);
         }
@@ -32,7 +33,7 @@ public class OffsetStringDecoder implements Decoder<String[]> {
     }
 
     @Override
-    public void encode(String[] value, ByteBuffer target) {
+    public void encode(EncodeContext<?, String[]> ctx, ByteBuffer target) {
 
     }
 }

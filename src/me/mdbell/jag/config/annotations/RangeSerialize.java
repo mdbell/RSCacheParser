@@ -8,12 +8,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by matthew on 5/9/16.
+ * Created by matthew on 5/11/16.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Serialize {
-    int[] opcodes();
+public @interface RangeSerialize {
+    int min();
+
+    int max();
 
     Class<? extends Codec> codec();
 }
