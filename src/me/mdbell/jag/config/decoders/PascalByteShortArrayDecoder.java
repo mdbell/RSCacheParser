@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  */
 public class PascalByteShortArrayDecoder implements Decoder<int[]>{
     @Override
-    public int[] decode(DecodeContext<int[]> ctx, ByteBuffer source) {
+    public int[] decode(DecodeContext<?, int[]> ctx, ByteBuffer source) {
         int len = Utils.readUByte(source);
         int[] res = new int[len];
         for(int i = 0; i < len;i++) {

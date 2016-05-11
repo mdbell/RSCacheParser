@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  */
 public class StringDecoder implements Decoder<String> {
     @Override
-    public String decode(DecodeContext<String> ctx, ByteBuffer source) {
+    public String decode(DecodeContext<?, String> ctx, ByteBuffer source) {
         return Utils.readString(source);
     }
 

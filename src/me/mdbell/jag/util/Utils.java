@@ -52,8 +52,9 @@ public class Utils implements Constants {
 
     public static String readString(ByteBuffer buffer, int delim) {
         int pos = buffer.position();
-        while(buffer.remaining() > 0 && buffer.get() != delim);
-        return new String(buffer.array(),pos,buffer.position());
+        int i;
+        while (buffer.remaining() > 0 && (i = readUByte(buffer)) != delim) ;
+        return new String(buffer.array(), pos, buffer.position() - pos - 1);
     }
 
     public static String readString(InputStream in) throws IOException {

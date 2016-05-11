@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
  */
 public class ActionDecoder implements Decoder<String[]>{
     @Override
-    public String[] decode(DecodeContext<String[]> ctx, ByteBuffer source) {
+    public String[] decode(DecodeContext<?, String[]> ctx, ByteBuffer source) {
         String[] value = ctx.getValue();
         if(value == null) {
             value = new String[5];

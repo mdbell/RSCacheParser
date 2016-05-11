@@ -1,4 +1,6 @@
-package me.mdbell.jag.config;
+package me.mdbell.jag.config.annotations;
+
+import me.mdbell.jag.config.Decoder;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

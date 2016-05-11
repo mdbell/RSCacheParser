@@ -8,8 +8,8 @@ import java.io.IOException;
  */
 public class CacheFileInputStream extends FilterInputStream {
 
-    private int read;
     private final int size;
+    private int read;
 
     CacheFileInputStream(int size, CacheSectorInputStream in) {
         super(in);

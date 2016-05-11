@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class ByteMulFiveDecoder extends ByteDecoder {
 
     @Override
-    public Integer decode(DecodeContext<Integer> ctx, ByteBuffer buffer) {
+    public Integer decode(DecodeContext<?, Integer> ctx, ByteBuffer buffer) {
         return super.decode(ctx, buffer) * 5;
     }
 

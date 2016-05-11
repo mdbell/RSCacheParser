@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  */
 public class BoolFalseDecoder implements Decoder<Boolean>{
     @Override
-    public Boolean decode(DecodeContext<Boolean> ctx, ByteBuffer source) {
+    public Boolean decode(DecodeContext<?, Boolean> ctx, ByteBuffer source) {
         return false;
     }
 

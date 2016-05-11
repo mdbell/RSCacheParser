@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
  */
 public interface Decoder<T> {
 
-    T decode(DecodeContext<T> ctx, ByteBuffer source);
+    T decode(DecodeContext<?, T> ctx, ByteBuffer source);
 
     void encode(T value, ByteBuffer target);
 }

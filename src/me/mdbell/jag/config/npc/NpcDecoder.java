@@ -13,7 +13,7 @@ public class NpcDecoder extends ConfigDecoder<Npc>{
     }
 
     @Override
-    protected Npc create() {
+    protected Npc createTarget() {
         return new Npc();
     }
 }
