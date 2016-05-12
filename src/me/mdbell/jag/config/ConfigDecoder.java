@@ -16,7 +16,7 @@ public abstract class ConfigDecoder<T> {
 
     public static final int TERMINATING_OPCODE = 0;
     private final FieldContext[] fieldContexts = new FieldContext[256];
-    private ByteBuffer buffer;
+    protected ByteBuffer buffer;
     private boolean read = false;
 
     protected ConfigDecoder(ByteBuffer buffer) {
@@ -24,20 +24,20 @@ public abstract class ConfigDecoder<T> {
     }
 
     private void parseMeta(T obj) {
-        if(read) {
+        if (read) {
             return;
         }
         read = true;
         Class<?> c = obj.getClass();
-        for(Field f : c.getDeclaredFields()) {
+        for (Field f : c.getDeclaredFields()) {
             f.setAccessible(true);
             Serialize s = f.getAnnotation(Serialize.class);
             if (s != null) {
-                Codec codec = null;
+                Codec codec;
                 try {
                     codec = s.codec().newInstance();
                 } catch (InstantiationException | IllegalAccessException e) {
-                    e.printStackTrace();
+                    continue;
                 }
                 FieldContext ctx = new FieldContext(f, codec);
                 for (int op : s.opcodes()) {
@@ -46,11 +46,11 @@ public abstract class ConfigDecoder<T> {
             }
             RangeSerialize rs = f.getAnnotation(RangeSerialize.class);
             if (rs != null) {
-                Codec codec = null;
+                Codec codec;
                 try {
                     codec = rs.codec().newInstance();
                 } catch (InstantiationException | IllegalAccessException e) {
-                    e.printStackTrace();
+                    continue;
                 }
                 FieldContext ctx = new FieldContext(f, codec);
                 for (int i = rs.min(); i <= rs.max(); i++) {
@@ -60,13 +60,9 @@ public abstract class ConfigDecoder<T> {
         }
     }
 
-    public void setPosition(int pos) {
-        buffer.position(pos);
-    }
-
     protected abstract T createTarget();
 
-    public T decode() throws IOException {
+    protected T decode() throws IOException {
         if (buffer.remaining() == 0) {
             return null;
         }
@@ -94,8 +90,8 @@ public abstract class ConfigDecoder<T> {
             DecodeContext<?, ?> ctx = createCtx(res, opcode, f);
             Object value = codec.decode(ctx, buffer);
             f.set(res, value);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (IllegalAccessException ignored) {
+
         }
     }
 

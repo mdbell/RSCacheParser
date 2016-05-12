@@ -1,17 +1,13 @@
 package me.mdbell;
 
+import me.mdbell.jag.Constants;
 import me.mdbell.jag.archive.ArchiveEntry;
 import me.mdbell.jag.archive.ArchiveInputStream;
 import me.mdbell.jag.cache.CacheFile;
 import me.mdbell.jag.cache.CacheFileSystem;
-import me.mdbell.jag.cache.Constants;
-import me.mdbell.jag.config.npc.Npc;
-import me.mdbell.jag.config.npc.NpcDecoder;
 import me.mdbell.jag.util.Utils;
-import org.apache.commons.compress.utils.IOUtils;
 
 import java.io.*;
-import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
@@ -103,16 +99,6 @@ public class Entry implements Constants {
         ArchiveEntry entry;
         while ((entry = arc.next()) != null) {
             String name = prefix + getNameFromHash(entry.getHash());
-            if(name.endsWith("npc.dat")) {
-                byte[] b = IOUtils.toByteArray(arc);
-                ByteBuffer wrapped = ByteBuffer.wrap(b);
-                NpcDecoder decoder = new NpcDecoder(wrapped);
-                Npc n;
-                while ((n = decoder.decode()) != null) {
-                    System.out.println(n);
-                }
-                System.exit(0);
-            }
             dumpFile(name, zout, arc);
         }
     }

@@ -1,6 +1,6 @@
 package me.mdbell.jag.util;
 
-import me.mdbell.jag.cache.Constants;
+import me.mdbell.jag.Constants;
 
 import java.io.FilterInputStream;
 import java.io.IOException;

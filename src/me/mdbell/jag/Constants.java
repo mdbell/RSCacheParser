@@ -1,4 +1,4 @@
-package me.mdbell.jag.cache;
+package me.mdbell.jag;
 
 /**
  * @author matt123337

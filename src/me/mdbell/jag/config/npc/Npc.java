@@ -12,6 +12,8 @@ import java.util.Arrays;
  */
 public class Npc {
 
+    int id;
+
     @Serialize(opcodes = 1, codec = PascalByteShortArrayCodec.class)
     int[] models;
     @Serialize(opcodes = 2, codec = StringCodec.class)
@@ -63,7 +65,7 @@ public class Npc {
     @Serialize(opcodes = 103, codec = ShortCodec.class)
     int degreesToTurn = 32;
 
-    @Serialize(opcodes = 106, codec = VarbitCodec.class)
+    @Serialize(opcodes = 106, codec = NpcVarbitCodec.class)
     int varBitId = -1;
     int sessionSettingId = -1;
     int[] childrenIds;
@@ -73,7 +75,8 @@ public class Npc {
     @Override
     public String toString() {
         return "Npc{" +
-                "models=" + Arrays.toString(models) +
+                "id=" + id +
+                ", models=" + Arrays.toString(models) +
                 ", name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
                 ", boundDim=" + boundDim +

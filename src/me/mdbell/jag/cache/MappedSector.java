@@ -1,11 +1,13 @@
 package me.mdbell.jag.cache;
 
+import me.mdbell.jag.Constants;
+
 import java.nio.MappedByteBuffer;
 
 /**
  * @author matt123337
  */
-public class MappedSector implements ISector, Constants{
+public class MappedSector implements ISector, Constants {
 
     private MappedByteBuffer buffer;
 

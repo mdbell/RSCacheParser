@@ -1,5 +1,7 @@
 package me.mdbell.jag.cache;
 
+import me.mdbell.jag.Constants;
+
 import java.io.IOException;
 import java.io.InputStream;
 

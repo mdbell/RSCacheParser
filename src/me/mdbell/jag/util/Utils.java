@@ -1,7 +1,7 @@
 package me.mdbell.jag.util;
 
+import me.mdbell.jag.Constants;
 import me.mdbell.jag.cache.CacheFile;
-import me.mdbell.jag.cache.Constants;
 
 import java.io.EOFException;
 import java.io.IOException;
