@@ -17,7 +17,9 @@ public class RsObjectDecoder extends IndexedConfigDecoder<RsObject> {
     @Override
     public RsObject forId(int id) throws IOException {
         RsObject res = super.forId(id);
-        res.id = id;
+        if (res != null) {
+            res.id = id;
+        }
         return res;
     }
 

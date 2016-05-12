@@ -16,7 +16,9 @@ public class NpcDecoder extends IndexedConfigDecoder<Npc> {
 
     public Npc forId(int id) throws IOException {
         Npc n = super.forId(id);
-        n.id = id;
+        if (n != null) {
+            n.id = id;
+        }
         return n;
     }
 
