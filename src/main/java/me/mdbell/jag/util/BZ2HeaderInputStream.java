@@ -19,7 +19,7 @@ public class BZ2HeaderInputStream extends FilterInputStream implements Constants
 
     @Override
     public int read() throws IOException {
-        if(pos < HEADER_LENGTH) {
+        if (pos < HEADER_LENGTH) {
             return BZIP_HEADER[pos++];
         }
         return in.read();

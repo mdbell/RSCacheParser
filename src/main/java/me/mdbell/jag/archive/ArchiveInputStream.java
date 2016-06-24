@@ -1,6 +1,5 @@
 package me.mdbell.jag.archive;
 
-import me.mdbell.Entry;
 import me.mdbell.jag.util.BZ2HeaderInputStream;
 import me.mdbell.jag.util.Utils;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
@@ -11,7 +10,6 @@ import java.io.InputStream;
 
 import static me.mdbell.jag.util.Utils.readInt;
 import static me.mdbell.jag.util.Utils.readTriInt;
-import static me.mdbell.jag.util.Utils.readUShort;
 
 /**
  * Created by matthew on 5/7/16.
@@ -51,12 +49,12 @@ public class ArchiveInputStream extends FilterInputStream {
     public int read(byte[] b, int off, int len) throws IOException {
 
         int read;
-        for(read = 0; read < len;read++) {
+        for (read = 0; read < len; read++) {
             int i = read();
-            if(i == -1) {
-                if(read == 0) {
+            if (i == -1) {
+                if (read == 0) {
                     return -1;
-                }else{
+                } else {
                     break;
                 }
             }

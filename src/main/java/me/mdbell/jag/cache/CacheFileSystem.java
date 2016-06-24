@@ -44,7 +44,7 @@ public class CacheFileSystem implements Constants {
         ByteBuffer buffer = ByteBuffer.allocate(SECTOR_TOTAL_SIZE);
         long pos = idx * SECTOR_TOTAL_SIZE;
 
-        Utils.readFully(channel,pos,buffer);
+        Utils.readFully(channel, pos, buffer);
 
         buffer.flip(); // switch to reading
 

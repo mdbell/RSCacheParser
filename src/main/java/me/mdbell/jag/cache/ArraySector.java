@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * @author matt123337
  */
-final class ArraySector implements ISector{
+final class ArraySector implements ISector {
 
     private int fileNum; // current fileNum (short)
     private int partNum; // current file part (short)
@@ -13,7 +13,7 @@ final class ArraySector implements ISector{
     private int cacheNum; // idx file (single byte)
     private byte[] data; // file data (512 bytes)
 
-    ArraySector(int fileNum, int partNum, int sectorNum, int cacheNum, byte[] data){
+    ArraySector(int fileNum, int partNum, int sectorNum, int cacheNum, byte[] data) {
         this.fileNum = fileNum;
         this.partNum = partNum;
         this.sectorNum = sectorNum;
@@ -21,19 +21,19 @@ final class ArraySector implements ISector{
         this.data = data;
     }
 
-    public int getFileNum(){
+    public int getFileNum() {
         return fileNum;
     }
 
-    public int getPartNum(){
+    public int getPartNum() {
         return partNum;
     }
 
-    public int getSectorNum(){
+    public int getSectorNum() {
         return sectorNum;
     }
 
-    public int getCacheNum(){
+    public int getCacheNum() {
         return cacheNum;
     }
 
@@ -53,6 +53,6 @@ final class ArraySector implements ISector{
     }
 
     public void getBytes(int pos, byte[] b, int off, int len) {
-        System.arraycopy(data,pos,b,off,len);
+        System.arraycopy(data, pos, b, off, len);
     }
 }

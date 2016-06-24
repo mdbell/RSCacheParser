@@ -6,7 +6,7 @@ import java.io.OutputStream;
 /**
  * @author matt123337
  */
-public class CacheSectorOutputStream extends OutputStream{
+public class CacheSectorOutputStream extends OutputStream {
 
     private ArraySector first;
     private ArraySector sector;

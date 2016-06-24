@@ -14,7 +14,7 @@ public class ActionCodec implements Codec<String[]> {
     @Override
     public String[] decode(DecodeContext<?, String[]> ctx, ByteBuffer source) {
         String[] value = ctx.getValue();
-        if(value == null) {
+        if (value == null) {
             value = new String[5];
         }
         value[ctx.getOpcode() - ctx.getOffset()] = Utils.readString(source);

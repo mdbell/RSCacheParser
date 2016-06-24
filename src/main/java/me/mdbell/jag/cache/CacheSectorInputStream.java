@@ -11,7 +11,7 @@ import java.io.InputStream;
 public final class CacheSectorInputStream extends InputStream implements Constants {
 
     private int pos;
-    private ISector sector,first;
+    private ISector sector, first;
     private CacheFileSystem fs;
 
     CacheSectorInputStream(CacheFileSystem fs, ISector sector) {

@@ -6,7 +6,7 @@ package me.mdbell.jag;
 public interface Constants {
 
     String[] INDEX_NAMES = {"archives", "models", "anim", "audio", "maps"};
-    String[] ARCHIVE_NAMES = {null,"title", "config", "interface", "media", "versionlist", "textures","wordenc", "sounds"};
+    String[] ARCHIVE_NAMES = {null, "title", "config", "interface", "media", "versionlist", "textures", "wordenc", "sounds"};
 
     int SECTOR_HEADER_SIZE = 8;
 
@@ -17,6 +17,6 @@ public interface Constants {
 
     int INDEX_TOTAL_SIZE = 6;
 
-    char[] BZIP_HEADER = {'B','Z','h','1'};
+    char[] BZIP_HEADER = {'B', 'Z', 'h', '1'};
     int HEADER_LENGTH = 4;
 }

@@ -15,7 +15,7 @@ public class PascalByteShortArrayCodec implements Codec<int[]> {
     public int[] decode(DecodeContext<?, int[]> ctx, ByteBuffer source) {
         int len = Utils.readUByte(source);
         int[] res = new int[len];
-        for(int i = 0; i < len;i++) {
+        for (int i = 0; i < len; i++) {
             res[i] = Utils.readUShort(source);
         }
         return res;
